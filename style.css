@@ -1,6 +1,9 @@
 html {
-  /* Dark blue used for highlights across the site */
-  --color-accent: oklch(40% 0.15 260);
+  /* Follow the OS light/dark setting */
+  color-scheme: light dark;
+
+  /* Blue used for highlights across the site: dark in light mode, lighter in dark mode */
+  --color-accent: light-dark(oklch(40% 0.15 260), oklch(70% 0.15 260));
 }
 
 body {
@@ -68,8 +71,17 @@ nav a:hover {
 /* Form controls don't inherit the page font by default */
 input,
 textarea,
-button {
+button,
+select {
   font: inherit;
+}
+
+/* Theme switcher pinned to the top right corner */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
 }
 
 /* Two-column form: label text on the left, controls on the right */

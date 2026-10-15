@@ -34,16 +34,11 @@ h1 {
   font-size: 400%;
 }
 
-/* Home: name heading with the photo beside it, vertically centered */
-.home header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* Sized in rem so it scales with the heading */
-.home header img {
-  width: 8rem;
+/* Home: size the photo in rem so it stays about as wide as the name heading */
+.home img {
+  display: block;
+  width: 20rem;
+  max-width: 100%;
   height: auto;
 }
 

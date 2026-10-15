@@ -1,6 +1,210 @@
+html {
+  /* Dark blue used for highlights across the site */
+  --color-accent: oklch(40% 0.15 260);
+}
+
 body {
   /* Set line height to 1.5 times the font size
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
+
+  /* Limit line length for readability and center the content */
+  max-width: 100ch;
+  margin-inline: auto;
+  padding: 1em;
+}
+
+/* Tighter leading than body text, and balanced line lengths when wrapping */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Make the page title clearly larger than section headings */
+h1 {
+  font-size: 400%;
+}
+
+/* Ignore the list markup so the links become direct flex items of the nav */
+nav ul,
+nav li {
+  display: contents;
+}
+
+nav {
+  display: flex;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+/* Give every nav link an equal share of the width */
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
+}
+
+/* Thick accent underline for the current page and on hover; reduce
+   bottom padding by the border width so the link keeps the same height */
+nav a.current,
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  padding-bottom: 0.1em;
+}
+
+/* Faint accent tint behind the hovered link */
+nav a:hover {
+  background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
+}
+
+/* Form controls don't inherit the page font by default */
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+/* Two-column form: label text on the left, controls on the right */
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
+
+/* Each label spans both columns and shares the form's columns,
+   so its text and its control line up with the other rows */
+form label {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+}
+
+form button {
+  grid-column: 1 / -1;
+}
+
+/* As many 15em-minimum columns as fit, sharing any leftover width */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 0.5em;
+}
+
+/* Each article spans 3 of the parent's rows and shares them,
+   so headings, images and text line up across each row of cards */
+.projects article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+
+.projects h2 {
+  margin: 0;
+}
+
+/* Resume: muted gray for secondary text such as dates and the tagline */
+.resume {
+  --color-muted: color-mix(in oklch, canvastext 60%, canvas);
+}
+
+/* Centered name, tagline and contact line, like the top of the PDF */
+.resume header {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.resume header h1 {
+  font-size: 250%;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25em;
+}
+
+.resume header p {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* <address> is italic by default */
+.resume address {
+  font-style: normal;
+}
+
+.resume address a {
+  color: var(--color-accent);
+}
+
+/* Small uppercase section titles with an accent rule underneath */
+.resume h2 {
+  font-size: 100%;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.25em;
+  margin-top: 1.5em;
+}
+
+/* Two columns: title on the left, dates on the right, everything else
+   spanning the full width underneath */
+.resume article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1em;
+  align-items: baseline;
+}
+
+.resume article > * {
+  grid-column: 1 / -1;
+}
+
+.resume article > h3 {
+  grid-column: 1;
+  font-size: 100%;
+  margin-block: 0.75em 0.25em;
+}
+
+.resume article > p:has(> time) {
+  grid-column: 2;
+  grid-row: 1;
+  font-style: italic;
+  color: var(--color-muted);
+  margin-block: 0.75em 0.25em;
+}
+
+.resume article p {
+  margin-block: 0.25em;
+}
+
+.resume ul {
+  margin-block: 0.25em;
+  padding-left: 1.25em;
+}
+
+.resume li::marker {
+  color: var(--color-accent);
+}
+
+/* Skills: bold label column next to its values */
+.resume dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25em 1em;
+}
+
+.resume dt {
+  font-weight: bold;
+}
+
+.resume dd {
+  margin: 0;
 }

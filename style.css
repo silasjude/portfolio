@@ -34,8 +34,9 @@ h1 {
   font-size: 400%;
 }
 
-/* Home: size the photo in rem so it stays about as wide as the name heading */
-.home img {
+/* Home: size the photo in rem so it stays about as wide as the name heading.
+   Only the direct child, so project card images aren't affected */
+.home > img {
   display: block;
   width: 20rem;
   max-width: 100%;
@@ -116,8 +117,8 @@ form button {
 /* As many 15em-minimum columns as fit, sharing any leftover width */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 0.5em;
+  grid-template-columns: repeat(auto-fill, minmax(min(15em, 100%), 1fr));
+  gap: 1em;
 }
 
 /* Each article spans 3 of the parent's rows and shares them,
@@ -126,10 +127,27 @@ form button {
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 3;
+  /* Let cards shrink to their column instead of being stretched by wide content */
+  min-width: 0;
 }
 
 .projects h2 {
   margin: 0;
+}
+
+/* Every card image fills its column at the same 4:3 shape,
+   cropping the edges rather than stretching the picture */
+.projects img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.25em;
+}
+
+.projects p {
+  margin-block: 0.5em 0;
 }
 
 /* GitHub stats: four equal columns, labels in the first row and

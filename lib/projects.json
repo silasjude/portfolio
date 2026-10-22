@@ -2,19 +2,19 @@
     {
         "title": "DonkeyCar Fork",
         "year": "2026",
-        "image": "../images/dsc190.jpeg",
+        "image": "images/dsc190.jpeg",
         "description": "Added and improved self-driving functionalities in the DonkeyCar framework, including line- and lane-following behaviors and obstacle avoidance, enabling our RC car to navigate a track completely autonomously with a team at UCSD."
     },
     {
         "title": "Tag Analysis on Recipe Data",
         "year": "2026",
-        "image": "../images/dsc80.jpeg",
+        "image": "images/dsc80.png",
         "description": "Performed statistical analysis on a toy dataset of internet recipes as an exercise in data modeling for DSC80 at UCSD."
     },
     {
         "title": "Emissions Data Visualization Project",
         "year": "2026",
-        "image": "../images/dsc106lab1.png",
+        "image": "images/dsc106lab1.png",
         "description": "Created visualizations for World Bank data on urbanization and emissions, and explored various data processing and visualization techniques in order to sway viewers towards one or another viewpoint."
     },
     {

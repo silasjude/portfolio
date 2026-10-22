@@ -128,10 +128,13 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
   const projects = Array.isArray(project) ? project : [project];
 
   for (let p of projects) {
+    // Local image paths are relative to the site root, so they work from any page
+    const imageSrc = p.image.startsWith('http') ? p.image : BASE_PATH + p.image;
+
     const article = document.createElement('article');
     article.innerHTML = `
       <${headingLevel}>${p.title}</${headingLevel}>
-      <img src="${p.image}" alt="${p.title}">
+      <img src="${imageSrc}" alt="${p.title}">
       <p>${p.description}</p>
     `;
     containerElement.appendChild(article);

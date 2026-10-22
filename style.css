@@ -132,6 +132,58 @@ form button {
   margin: 0;
 }
 
+/* GitHub stats: four equal columns, labels in the first row and
+   numbers in the second, so each dt sits directly above its dd */
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.5em;
+  margin: 0;
+  padding: 1em;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
+  border-radius: 0.5em;
+  background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
+  text-align: center;
+}
+
+/* Small muted labels */
+#profile-stats dt {
+  grid-row: 1;
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: color-mix(in oklch, canvastext 60%, canvas);
+}
+
+/* Big accent-colored numbers */
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 250%;
+  font-weight: bold;
+  line-height: 1.2;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Narrow screens: switch to two columns, two stats per row */
+@media (max-width: 30em) {
+  #profile-stats dl {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, auto);
+    row-gap: 0.25em;
+  }
+
+  #profile-stats dt:nth-of-type(n + 3) {
+    grid-row: 3;
+  }
+
+  #profile-stats dd:nth-of-type(n + 3) {
+    grid-row: 4;
+  }
+}
+
 /* Resume: muted gray for secondary text such as dates and the tagline */
 .resume {
   --color-muted: color-mix(in oklch, canvastext 60%, canvas);

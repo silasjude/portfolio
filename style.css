@@ -121,18 +121,25 @@ form button {
   gap: 1em;
 }
 
-/* Each article spans 3 of the parent's rows and shares them,
-   so headings, images and text line up across each row of cards */
+/* Each article spans 4 of the parent's rows and shares them,
+   so headings, years, images and text line up across each row of cards */
 .projects article {
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 3;
+  grid-row: span 4;
   /* Let cards shrink to their column instead of being stretched by wide content */
   min-width: 0;
 }
 
 .projects h2 {
   margin: 0;
+}
+
+/* Smaller, muted year under each project title */
+.projects .project-year {
+  font-size: 0.85em;
+  color: color-mix(in oklch, canvastext 60%, canvas);
+  margin-block-end: 0.25em;
 }
 
 /* Every card image fills its column at the same 4:3 shape,
@@ -299,4 +306,79 @@ form button {
 
 .resume dd {
   margin: 0;
+}
+
+/* Pie chart and its legend side by side, vertically centered;
+   the legend wraps below the chart when there isn't room */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2em;
+  margin-block: 2em;
+}
+
+#projects-pie-plot {
+  flex: 0 1 20em;
+  max-width: 20em;
+
+  overflow: visible;
+
+  /* Ease wedge changes such as the hover fade */
+  path {
+    transition: 200ms;
+    cursor: pointer;
+  }
+
+  /* While a wedge is hovered, fade out all the other wedges */
+  &:has(path:hover) {
+    path:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* Pie legend: a bordered box of swatch + label entries that
+   flow into as many columns as fit */
+.legend {
+  flex: 1 1 15em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 0.5em 1em;
+  list-style: none;
+  margin: 0;
+  padding: 1em;
+  border: 1px solid color-mix(in oklch, canvastext 20%, canvas);
+  border-radius: 0.5em;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+/* Colored dot matching the slice; --color is set per item in projects.js */
+.legend .swatch {
+  flex-shrink: 0;
+  width: 1em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--color);
+}
+
+/* Counts in muted gray so the labels stand out */
+.legend em {
+  font-style: normal;
+  color: color-mix(in oklch, canvastext 60%, canvas);
+}
+
+/* Selected wedge and legend item turn magenta, distinct from the
+   Tableau wedge colors; !important beats the inline --color on each li */
+.selected {
+  --color: oklch(100% 0 342.768) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
 }

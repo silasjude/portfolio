@@ -1,5 +1,3 @@
-console.log('IT’S ALIVE!');
-
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
@@ -17,6 +15,7 @@ let pages = [
   { url: 'projects/', title: 'Projects' },
   { url: 'resume/', title: 'Resume' },
   { url: 'contact/', title: 'Contact' },
+  { url: 'meta/', title: 'Meta'},
   { url: 'https://github.com/silasjude', title: 'GitHub' },
 ];
 

@@ -276,6 +276,49 @@ dl.stats dd {
     }
 }
 
+/* Brush selection summary: the count and the language breakdown share
+   one card */
+#selection-summary {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-block: 1em;
+    padding: 1em;
+    border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
+    border-radius: 0.5em;
+    background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
+    text-align: center;
+}
+
+#selection-count {
+    margin: 0;
+    font-weight: bold;
+}
+
+/* The card already supplies the box, so the inner dl drops its own.
+   Every language is always listed (0 lines when nothing is selected) in
+   one evenly shared row, so the card keeps its height while brushing */
+#selection-summary dl.stats {
+    display: flex;
+    padding: 0;
+    border: none;
+    background: none;
+
+    div {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    /* Values like "212 lines (25.5%)" are longer than the headline stats.
+       They stay on one line and shrink with the card on narrow screens,
+       which keeps them inside the reserved height */
+    dd {
+        font-size: min(150%, 3.5cqi);
+        white-space: nowrap;
+    }
+}
+
 /* Resume: muted gray for secondary text such as dates and the tagline */
 .resume {
     --color-muted: color-mix(in oklch, canvastext 60%, canvas);
@@ -523,4 +566,22 @@ circle {
 
 circle:hover {
     transform: scale(1.5);
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
 }

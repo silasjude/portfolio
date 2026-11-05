@@ -1,5 +1,5 @@
 {
-  "devDependencies": {
-    "elocuent": "^0.0.4"
-  }
+    "devDependencies": {
+        "elocuent": "^0.0.4"
+    }
 }

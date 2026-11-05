@@ -1,21 +1,21 @@
 html {
-  /* Follow the OS light/dark setting */
-  color-scheme: light dark;
+    /* Follow the OS light/dark setting */
+    color-scheme: light dark;
 
-  /* Blue used for highlights across the site: dark in light mode, lighter in dark mode */
-  --color-accent: light-dark(oklch(40% 0.15 260), oklch(70% 0.15 260));
+    /* Blue used for highlights across the site: dark in light mode, lighter in dark mode */
+    --color-accent: light-dark(oklch(40% 0.15 260), oklch(70% 0.15 260));
 }
 
 body {
-  /* Set line height to 1.5 times the font size
-	   and use the OS’s UI font as the website font
-	 */
-  font: 100%/1.5 system-ui;
+    /* Set line height to 1.5 times the font size
+       and use the OS’s UI font as the website font
+     */
+    font: 100%/1.5 system-ui;
 
-  /* Limit line length for readability and center the content */
-  max-width: 100ch;
-  margin-inline: auto;
-  padding: 1em;
+    /* Limit line length for readability and center the content */
+    max-width: 100ch;
+    margin-inline: auto;
+    padding: 1em;
 }
 
 /* Tighter leading than body text, and balanced line lengths when wrapping */
@@ -25,58 +25,58 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.1;
-  text-wrap: balance;
+    line-height: 1.1;
+    text-wrap: balance;
 }
 
 /* Make the page title clearly larger than section headings */
 h1 {
-  font-size: 400%;
+    font-size: 400%;
 }
 
 /* Home: size the photo in rem so it stays about as wide as the name heading.
    Only the direct child, so project card images aren't affected */
 .home > img {
-  display: block;
-  width: 20rem;
-  max-width: 100%;
-  height: auto;
+    display: block;
+    width: 20rem;
+    max-width: 100%;
+    height: auto;
 }
 
 /* Ignore the list markup so the links become direct flex items of the nav */
 nav ul,
 nav li {
-  display: contents;
+    display: contents;
 }
 
 nav {
-  display: flex;
-  /* Leave room above for the theme switcher */
-  margin-top: 0.5rem;
-  margin-bottom: 1em;
-  border-bottom: 1px solid var(--color-accent);
+    display: flex;
+    /* Leave room above for the theme switcher */
+    margin-top: 0.5rem;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--color-accent);
 }
 
 /* Give every nav link an equal share of the width */
 nav a {
-  flex: 1;
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-  padding: 0.5em;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0.5em;
 }
 
 /* Thick accent underline for the current page and on hover; reduce
    bottom padding by the border width so the link keeps the same height */
 nav a.current,
 nav a:hover {
-  border-bottom: 0.4em solid var(--color-accent);
-  padding-bottom: 0.1em;
+    border-bottom: 0.4em solid var(--color-accent);
+    padding-bottom: 0.1em;
 }
 
 /* Faint accent tint behind the hovered link */
 nav a:hover {
-  background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
+    background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
 }
 
 /* Form controls don't inherit the page font by default */
@@ -84,368 +84,443 @@ input,
 textarea,
 button,
 select {
-  font: inherit;
+    font: inherit;
 }
 
 /* Theme switcher pinned to the top right corner */
 .color-scheme {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  font-size: 80%;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 80%;
 }
 
 /* Two-column form: label text on the left, controls on the right */
 form {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
 }
 
 /* Each label spans both columns and shares the form's columns,
    so its text and its control line up with the other rows */
 form label {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
 }
 
 form button {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
 
 /* As many 15em-minimum columns as fit, sharing any leftover width */
 .projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(15em, 100%), 1fr));
-  gap: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(15em, 100%), 1fr));
+    gap: 1em;
 }
 
 /* Each article spans 4 of the parent's rows and shares them,
    so headings, years, images and text line up across each row of cards */
 .projects article {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 4;
-  /* Let cards shrink to their column instead of being stretched by wide content */
-  min-width: 0;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    /* Let cards shrink to their column instead of being stretched by wide content */
+    min-width: 0;
 }
 
 .projects h2 {
-  margin: 0;
+    margin: 0;
 }
 
 /* Smaller, muted year under each project title */
 .projects .project-year {
-  font-size: 0.85em;
-  color: color-mix(in oklch, canvastext 60%, canvas);
-  margin-block-end: 0.25em;
+    font-size: 0.85em;
+    color: color-mix(in oklch, canvastext 60%, canvas);
+    margin-block-end: 0.25em;
 }
 
 /* Every card image fills its column at the same 4:3 shape,
    cropping the edges rather than stretching the picture */
 .projects img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 0.25em;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 0.25em;
 }
 
 .projects p {
-  margin-block: 0.5em 0;
+    margin-block: 0.5em 0;
 }
 
 /* GitHub stats: four equal columns, labels in the first row and
    numbers in the second, so each dt sits directly above its dd */
 #profile-stats dl {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto auto;
-  column-gap: 0.5em;
-  margin: 0;
-  padding: 1em;
-  border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
-  border-radius: 0.5em;
-  background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
-  text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 0.5em;
+    margin: 0;
+    padding: 1em;
+    border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
+    border-radius: 0.5em;
+    background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
+    text-align: center;
 }
 
 /* Small muted labels */
 #profile-stats dt {
-  grid-row: 1;
-  font-size: 80%;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: color-mix(in oklch, canvastext 60%, canvas);
+    grid-row: 1;
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: color-mix(in oklch, canvastext 60%, canvas);
 }
 
 /* Big accent-colored numbers */
 #profile-stats dd {
-  grid-row: 2;
-  margin: 0;
-  font-size: 250%;
-  font-weight: bold;
-  line-height: 1.2;
-  color: var(--color-accent);
-  font-variant-numeric: tabular-nums;
+    grid-row: 2;
+    margin: 0;
+    font-size: 250%;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
 }
 
 /* Narrow screens: switch to two columns, two stats per row */
 @media (max-width: 30em) {
-  #profile-stats dl {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
-    row-gap: 0.25em;
-  }
+    #profile-stats dl {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, auto);
+        row-gap: 0.25em;
+    }
 
-  #profile-stats dt:nth-of-type(n + 3) {
-    grid-row: 3;
-  }
+    #profile-stats dt:nth-of-type(n + 3) {
+        grid-row: 3;
+    }
 
-  #profile-stats dd:nth-of-type(n + 3) {
-    grid-row: 4;
-  }
+    #profile-stats dd:nth-of-type(n + 3) {
+        grid-row: 4;
+    }
 }
 
 /* Meta stats: same card as the GitHub stats, but each stat is its own
    cell. The column count steps through divisors of six (1, 2, 3, 6) based
    on the width of #stats, so the rows always come out even */
 #stats {
-  container-type: inline-size;
+    container-type: inline-size;
 }
 
 dl.stats {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1em 0.5em;
-  margin: 0;
-  padding: 1em;
-  border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
-  border-radius: 0.5em;
-  background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
-  text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em 0.5em;
+    margin: 0;
+    padding: 1em;
+    border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
+    border-radius: 0.5em;
+    background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
+    text-align: center;
 }
 
 /* Label stacked above its number */
 dl.stats div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Small muted labels */
 dl.stats dt {
-  font-size: 80%;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: color-mix(in oklch, canvastext 60%, canvas);
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: color-mix(in oklch, canvastext 60%, canvas);
 }
 
 /* Big accent-colored numbers */
 dl.stats dd {
-  margin: 0;
-  font-size: 250%;
-  font-weight: bold;
-  line-height: 1.2;
-  color: var(--color-accent);
-  font-variant-numeric: tabular-nums;
+    margin: 0;
+    font-size: 250%;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
 }
 
 @container (min-width: 28em) {
-  dl.stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    dl.stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @container (min-width: 40em) {
-  dl.stats {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    dl.stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* Six across: shrink the numbers so values like "afternoon" still fit */
 @container (min-width: 56em) {
-  dl.stats {
-    grid-template-columns: repeat(6, 1fr);
-  }
+    dl.stats {
+        grid-template-columns: repeat(6, 1fr);
+    }
 
-  dl.stats dd {
-    font-size: 175%;
-  }
+    dl.stats dd {
+        font-size: 175%;
+    }
 }
 
 /* Resume: muted gray for secondary text such as dates and the tagline */
 .resume {
-  --color-muted: color-mix(in oklch, canvastext 60%, canvas);
+    --color-muted: color-mix(in oklch, canvastext 60%, canvas);
 }
 
 /* Centered name, tagline and contact line, like the top of the PDF */
 .resume header {
-  text-align: center;
-  margin-bottom: 1.5em;
+    text-align: center;
+    margin-bottom: 1.5em;
 }
 
 .resume header h1 {
-  font-size: 250%;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.25em;
+    font-size: 250%;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25em;
 }
 
 .resume header p {
-  color: var(--color-muted);
-  margin: 0;
+    color: var(--color-muted);
+    margin: 0;
 }
 
 /* <address> is italic by default */
 .resume address {
-  font-style: normal;
+    font-style: normal;
 }
 
 .resume address a {
-  color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 /* Small uppercase section titles with an accent rule underneath */
 .resume h2 {
-  font-size: 100%;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 0.25em;
-  margin-top: 1.5em;
+    font-size: 100%;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.25em;
+    margin-top: 1.5em;
 }
 
 /* Two columns: title on the left, dates on the right, everything else
    spanning the full width underneath */
 .resume article {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 1em;
-  align-items: baseline;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1em;
+    align-items: baseline;
 }
 
 .resume article > * {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
 
 .resume article > h3 {
-  grid-column: 1;
-  font-size: 100%;
-  margin-block: 0.75em 0.25em;
+    grid-column: 1;
+    font-size: 100%;
+    margin-block: 0.75em 0.25em;
 }
 
 .resume article > p:has(> time) {
-  grid-column: 2;
-  grid-row: 1;
-  font-style: italic;
-  color: var(--color-muted);
-  margin-block: 0.75em 0.25em;
+    grid-column: 2;
+    grid-row: 1;
+    font-style: italic;
+    color: var(--color-muted);
+    margin-block: 0.75em 0.25em;
 }
 
 .resume article p {
-  margin-block: 0.25em;
+    margin-block: 0.25em;
 }
 
 .resume ul {
-  margin-block: 0.25em;
-  padding-left: 1.25em;
+    margin-block: 0.25em;
+    padding-left: 1.25em;
 }
 
 .resume li::marker {
-  color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 /* Skills: bold label column next to its values */
 .resume dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.25em 1em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25em 1em;
 }
 
 .resume dt {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .resume dd {
-  margin: 0;
+    margin: 0;
 }
 
 /* Pie chart and its legend side by side, vertically centered;
    the legend wraps below the chart when there isn't room */
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2em;
-  margin-block: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    margin-block: 2em;
 }
 
 #projects-pie-plot {
-  flex: 0 1 20em;
-  max-width: 20em;
+    flex: 0 1 20em;
+    max-width: 20em;
 
-  overflow: visible;
+    overflow: visible;
 
-  /* Ease wedge changes such as the hover fade */
-  path {
-    transition: 200ms;
-    cursor: pointer;
-  }
-
-  /* While a wedge is hovered, fade out all the other wedges */
-  &:has(path:hover) {
-    path:not(:hover) {
-      opacity: 0.5;
+    /* Ease wedge changes such as the hover fade */
+    path {
+        transition: 200ms;
+        cursor: pointer;
     }
-  }
+
+    /* While a wedge is hovered, fade out all the other wedges */
+    &:has(path:hover) {
+        path:not(:hover) {
+            opacity: 0.5;
+        }
+    }
 }
 
 /* Pie legend: a bordered box of swatch + label entries that
    flow into as many columns as fit */
 .legend {
-  flex: 1 1 15em;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-  gap: 0.5em 1em;
-  list-style: none;
-  margin: 0;
-  padding: 1em;
-  border: 1px solid color-mix(in oklch, canvastext 20%, canvas);
-  border-radius: 0.5em;
+    flex: 1 1 15em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 0.5em 1em;
+    list-style: none;
+    margin: 0;
+    padding: 1em;
+    border: 1px solid color-mix(in oklch, canvastext 20%, canvas);
+    border-radius: 0.5em;
 }
 
 .legend li {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
 /* Colored dot matching the slice; --color is set per item in projects.js */
 .legend .swatch {
-  flex-shrink: 0;
-  width: 1em;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background-color: var(--color);
+    flex-shrink: 0;
+    width: 1em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--color);
 }
 
 /* Counts in muted gray so the labels stand out */
 .legend em {
-  font-style: normal;
-  color: color-mix(in oklch, canvastext 60%, canvas);
+    font-style: normal;
+    color: color-mix(in oklch, canvastext 60%, canvas);
 }
 
 /* Selected wedge and legend item turn magenta, distinct from the
    Tableau wedge colors; !important beats the inline --color on each li */
 .selected {
-  --color: oklch(100% 0 342.768) !important;
+    --color: oklch(100% 0 342.768) !important;
 
-  &:is(path) {
-    fill: var(--color);
-  }
+    &:is(path) {
+        fill: var(--color);
+    }
+}
+
+/* Scatterplot gridlines: faint, with no axis line along the edge */
+.gridlines .domain {
+    display: none;
+}
+
+.gridlines .tick line {
+    stroke: canvastext;
+    stroke-opacity: 0.1;
+}
+
+/* Scatterplot dots use the site accent, so they follow light/dark mode */
+.dots circle {
+    fill: var(--color-accent);
+}
+
+/* Commit info: labels in the first column, values in the second */
+dl.info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25em 1em;
+    align-items: baseline;
+    margin: 0;
+
+    dt,
+    dd {
+        margin: 0;
+    }
+
+    /* Small muted labels so the values stand out */
+    dt {
+        font-size: 80%;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: color-mix(in oklch, canvastext 60%, canvas);
+    }
+
+    dd {
+        font-weight: 500;
+    }
+
+    transition-duration: 500ms;
+    transition-property: opacity, visibility;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Pinned to the top left of the viewport so it stays visible while scrolling */
+.tooltip {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+
+    /* Frosted card raised off the page: a translucent page-colored
+       background that blurs what's behind it, with a soft shadow */
+    background-color: color-mix(in oklch, canvas 80%, transparent);
+    backdrop-filter: blur(0.5em);
+    border: 1px solid color-mix(in oklch, canvastext 10%, transparent);
+    border-radius: 0.5em;
+    box-shadow: 0 0.25em 1em color-mix(in oklch, black 15%, transparent);
+    padding: 0.75em 1em;
+}
+
+circle {
+    transition: 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+circle:hover {
+    transform: scale(1.5);
 }

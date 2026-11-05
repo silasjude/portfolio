@@ -46,18 +46,48 @@ function renderCommitInfo(data, commits) {
   // Create the dl element
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
+  // Wrap each dt/dd pair in a div so the grid can lay them out as one unit
+  function addStat(labelHtml, value) {
+    const stat = dl.append('div');
+    stat.append('dt').html(labelHtml);
+    stat.append('dd').text(value);
+  }
+
   // Add total LOC
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
+  addStat('Total <abbr title="Lines of code">LOC</abbr>', data.length);
 
   // Add total commits
-  dl.append('dt').text('Total commits');
-  dl.append('dd').text(commits.length);
+  addStat('Total commits', commits.length);
 
-  // Add more stats as needed...
+  // Add number of files
+  addStat('Number of files', d3.group(data, (d) => d.file).size);
+
+  // Add longest file (in lines)
+  const fileLengths = d3.rollups(
+    data,
+    (v) => d3.max(v, (d) => d.line),
+    (d) => d.file,
+  );
+  addStat('Longest file (lines)', d3.max(fileLengths, (d) => d[1]));
+
+  // Add average line length (in characters)
+  addStat('Average line length', d3.mean(data, (d) => d.length).toFixed(1));
+
+  // Add most active time of day
+  const workByPeriod = d3.rollups(
+    data,
+    (v) => v.length,
+    (d) => d.datetime.toLocaleString('en', { dayPeriod: 'short' }),
+  );
+  // Drop the "in the" / "at" prefix so it reads as a single word
+  addStat(
+    'Most active time of day',
+    d3.greatest(workByPeriod, (d) => d[1])?.[0].replace(/^(in the|at) /, ''),
+  );
 }
 
 let data = await loadData();
 let commits = processCommits(data);
+console.log(commits);
 
 renderCommitInfo(data, commits);

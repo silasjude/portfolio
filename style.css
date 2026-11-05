@@ -209,6 +209,73 @@ form button {
   }
 }
 
+/* Meta stats: same card as the GitHub stats, but each stat is its own
+   cell. The column count steps through divisors of six (1, 2, 3, 6) based
+   on the width of #stats, so the rows always come out even */
+#stats {
+  container-type: inline-size;
+}
+
+dl.stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em 0.5em;
+  margin: 0;
+  padding: 1em;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
+  border-radius: 0.5em;
+  background-color: color-mix(in oklch, var(--color-accent) 8%, transparent);
+  text-align: center;
+}
+
+/* Label stacked above its number */
+dl.stats div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Small muted labels */
+dl.stats dt {
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: color-mix(in oklch, canvastext 60%, canvas);
+}
+
+/* Big accent-colored numbers */
+dl.stats dd {
+  margin: 0;
+  font-size: 250%;
+  font-weight: bold;
+  line-height: 1.2;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+@container (min-width: 28em) {
+  dl.stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 40em) {
+  dl.stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Six across: shrink the numbers so values like "afternoon" still fit */
+@container (min-width: 56em) {
+  dl.stats {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  dl.stats dd {
+    font-size: 175%;
+  }
+}
+
 /* Resume: muted gray for secondary text such as dates and the tagline */
 .resume {
   --color-muted: color-mix(in oklch, canvastext 60%, canvas);

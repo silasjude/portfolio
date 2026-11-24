@@ -10,13 +10,20 @@
 </head>
 <body>
     <h1>Meta</h1>
-    <div id="stats"></div>
+    <div id="filter-ui">
+        <label>
+            Show commits until:
+            <input type="range" id="commit-progress" min="0" max="100" value="100">
+            <time id="commit-time"></time>
+        </label>
+    </div>
     <h2>Commits by time of day</h2>
     <section id="selection-summary">
         <p id="selection-count">No commits selected</p>
         <dl id="language-breakdown" class="stats"></dl>
     </section>
     <div id="chart"></div>
+    <div id="stats"></div>
     <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
         <dd>
@@ -27,7 +34,7 @@
         <dd id="commit-date"></dd>
 
         <dt>Time</dt>
-        <dd id="commit-time"></dd>
+        <dd id="commit-tooltip-time"></dd>
 
         <dt>Author</dt>
         <dd id="commit-author"></dd>

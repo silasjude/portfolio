@@ -214,6 +214,8 @@ form button {
    on the width of #stats, so the rows always come out even */
 #stats {
     container-type: inline-size;
+    /* Sits under the scatter plot, so leave room for the x-axis labels */
+    margin-top: 2em;
 }
 
 dl.stats {
@@ -297,7 +299,7 @@ dl.stats dd {
 }
 
 /* The card already supplies the box, so the inner dl drops its own.
-   Every language is always listed (0 lines when nothing is selected) in
+   Every language is always listed (all commits when nothing is brushed) in
    one evenly shared row, so the card keeps its height while brushing */
 #selection-summary dl.stats {
     display: flex;

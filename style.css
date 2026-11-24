@@ -587,3 +587,22 @@ circle.selected {
   stroke-dasharray: 5 3;
   animation: marching-ants 2s linear infinite;
 }
+
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  > div {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  dt {
+    grid-column: 1;
+  }
+
+  dd {
+    grid-column: 2;
+  }
+}

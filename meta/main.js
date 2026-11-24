@@ -95,6 +95,35 @@ let filteredCommits = commits;
 
 renderCommitInfo(data, commits);
 
+// Files list: one row per file with its line count, for the commits up to
+// the slider's time. Called from onTimeSliderChange, so it re-runs whenever
+// the slider moves (and once on page load)
+function updateFileDisplay(filteredCommits) {
+    const lines = filteredCommits.flatMap((d) => d.lines);
+    const files = d3
+        .groups(lines, (d) => d.file)
+        .map(([name, lines]) => {
+            return { name, lines };
+        });
+
+    const filesContainer = d3
+        .select('#files')
+        .selectAll('div')
+        .data(files, (d) => d.name)
+        .join(
+            // This code only runs when the div is initially rendered
+            (enter) =>
+                enter.append('div').call((div) => {
+                    div.append('dt').append('code');
+                    div.append('dd');
+                }),
+        );
+
+    // This code updates the div info
+    filesContainer.select('dt > code').text((d) => d.name);
+    filesContainer.select('dd').text((d) => `${d.lines.length} lines`);
+}
+
 // Scatterplot
 // Scales are module-level so the brush code can map commits to pixels
 let xScale;
@@ -364,6 +393,9 @@ function onTimeSliderChange() {
 
     // 5. Refresh the selection count and language breakdown to match
     renderSelection();
+
+    // 6. Refresh the files list to match
+    updateFileDisplay(filteredCommits);
 }
 
 commitProgressInput.addEventListener('input', onTimeSliderChange);
